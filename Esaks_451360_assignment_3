@@ -1,0 +1,441 @@
+Task#1 Write a function
+def is_leap(year):
+    leap = False
+    if year%4 == 0:
+        if year%100 == 0:
+            if year%400 == 0:
+                leap = True
+            else:
+                leap = False
+        else:
+            leap = True
+    else:
+        leap = False
+    
+    return leap
+
+year = int(input())
+print(is_leap(year))
+
+Task # 2 The Minnion Game
+def minion_game(string):
+    # your code goes here
+    vowel = 'aeiou'.upper()
+    strl = len(string)
+    kevin = sum(strl-i for i in range(strl) if string[i] in vowel)
+    stuart = strl*(strl + 1)/2 - kevin
+    if kevin == stuart:
+        print ('Draw')
+    elif kevin > stuart:
+        print ('Kevin %d' % kevin)
+    else:
+        print ('Stuart %d' % stuart)
+
+if __name__ == '__main__':
+    s = input()
+    minion_game(s)
+
+Task # 3 Merge the Tools!
+from collections import OrderedDict
+def merge_the_tools(string, k):
+    # your code goes here
+    i = 0
+    while i < len(string):
+        word1 = "".join(OrderedDict.fromkeys(string[i: i+k]))      
+        print(word1)
+        i = i + k
+
+if __name__ == '__main__':
+    string, k = input(), int(input())
+    merge_the_tools(string, k)
+
+Task # 4 Time Delta
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the time_delta function below.
+import datetime
+
+format_string = "%a %d %b %Y %H:%M:%S %z"
+T = int(input())
+
+for test in range(T):
+    t1 = str(input())
+    t2 = str(input())
+
+    parsed_t1 = datetime.datetime.strptime(t1, format_string)
+    parsed_t2 = datetime.datetime.strptime(t2, format_string)
+
+    diff = parsed_t2 - parsed_t1
+
+    print (int(abs(diff.total_seconds())))
+
+Task # 5 Find Angle MBC 
+# importing math
+import math
+
+# taking inputs
+a = int(input())
+b = int(input())
+
+# finding distace and angle
+M = math.sqrt(a**2+b**2)
+theta = math.acos(b/M )
+
+# printing the angle
+print(int(round(math.degrees(theta),0)),'\u00B0',sep='')
+
+Task # 6 No Idea!
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+n, m = input().split()
+
+sc_ar = input().split()
+
+A = set(input().split())
+B = set(input().split())
+print(sum([(i in A) - (i in B) for i in sc_ar]))
+
+Task # 7 Work Order
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+n_ish = int(input())
+counter_dict = {}
+words_list = []
+
+for i in range(n_ish):
+  word = input()
+  words_list.append(word)
+  if word in counter_dict:
+    counter_dict[word] += 1
+  else:
+    counter_dict[word] = 1
+    
+print(len(counter_dict))
+print(' '.join([str(counter_dict[word]) for word in counter_dict]))
+
+Task # 8 Compress the String!
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+from itertools import groupby
+for key, group in groupby(input()):
+   print('({}, {})'.format(len(list(group)), key), end=" ")
+
+Task # 9 Company Logo
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+from collections import Counter
+
+class OrderedCounter(Counter):
+    pass
+
+if __name__ == '__main__':
+    [print(*c) for c in OrderedCounter(sorted(input())).most_common(3)]
+
+Task # 10 Piling Up!
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+for t in range(int(input())):
+    input()
+    lst = [int(i) for i in input().split()]
+    min_list = lst.index(min(lst))
+    left = lst[:min_list]
+    right = lst[min_list+1:]
+    if left == sorted(left,reverse=True) and right == sorted(right):
+        print("Yes")
+    else:
+        print("No")
+
+Task # 11 Triangle Quest 2
+for i in range(1,int(input())+1): #More than 2 lines will result in 0 score. Do not leave a blank line also
+    print (((10**i - 1)//9)**2)
+
+Task # 12 Iterables and Iterators
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+from itertools import combinations
+
+N = int(input())
+L = input().split()
+K = int(input())
+
+C = list(combinations(L, K))
+F = filter(lambda c: 'a' in c, C)
+print("{0:.3}".format(len(list(F))/len(C)))
+
+Task # 13 Triangle Quest
+for i in range(1, int(input())):
+    print(((10**i - 1) // 9)*i)
+
+
+Task # 14 Classes: Dealing with Complex Numbers
+import math
+
+class Complex(object):
+    def __init__(self, real, imaginary):
+        self.real=real
+        self.imaginary=imaginary
+        
+    def __add__(self, no):
+        return Complex(self.real+no.real,self.imaginary+no.imaginary)
+    def __sub__(self, no):
+        return Complex(self.real-no.real,self.imaginary-no.imaginary)
+        
+    def __mul__(self, no):
+        r=self.real*no.real-self.imaginary*no.imaginary
+        i=self.real*no.imaginary+self.imaginary*no.real
+        return Complex(r,i)
+
+    def __truediv__(self, no):
+        d=no.real**2+no.imaginary**2
+        n=self*Complex(no.real,-1*no.imaginary)
+        return Complex(n.real/d,n.imaginary/d)
+
+
+    def mod(self):
+        d=self.real**2+self.imaginary**2
+        return Complex(math.sqrt(d),0)
+    def __str__(self):
+        if self.imaginary == 0:
+            result = "%.2f+0.00i" % (self.real)
+        elif self.real == 0:
+            if self.imaginary >= 0:
+                result = "0.00+%.2fi" % (self.imaginary)
+            else:
+                result = "0.00-%.2fi" % (abs(self.imaginary))
+        elif self.imaginary > 0:
+            result = "%.2f+%.2fi" % (self.real, self.imaginary)
+        else:
+            result = "%.2f-%.2fi" % (self.real, abs(self.imaginary))
+        return result
+if __name__ == '__main__':
+    c = map(float, input().split())
+    d = map(float, input().split())
+    x = Complex(*c)
+    y = Complex(*d)
+    print(*map(str, [x+y, x-y, x*y, x/y, x.mod(), y.mod()]), sep='\n')
+
+Task # 15 Athlete Sort
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+if __name__ == '__main__':
+    nm = input().split()
+
+    n = int(nm[0])
+
+    m = int(nm[1])
+
+    arr = []
+
+    for _ in range(n):
+        arr.append(list(map(int, input().rstrip().split())))
+
+    k = int(input())
+
+    P=sorted(arr,key=lambda row:row[k])
+    for i in range(len(P)):
+        for j in range(len(P[i])):
+            print(P[i][j], end=' ')
+        print()
+
+Task # 16 ginortS 
+def f(c):
+    code = 0
+    if c.isupper():
+        code = 10 ** 3
+    elif c.isdigit():
+        code = 10 ** 6
+        if ord(c) % 2 == 0:
+            code = 10 ** 9
+    return code + ord(c)
+
+print(*sorted(input(), key=lambda c: f(c)), sep='')
+
+Task # 17 Validating Email Addresses With a Filter
+def fun(email):
+    try:
+        username, url = email.split("@")
+        website, extension = url.split(".")
+    except ValueError:
+        return False
+    
+    if username.replace("-", "").replace("_", "").isalnum() is False:
+        return False
+    elif website.isalnum() is False:
+        return False
+    elif len(extension) > 3:
+        return False
+    else:
+        return True
+
+def filter_mail(emails):
+    return list(filter(fun, emails))
+
+if __name__ == '__main__':
+    n = int(input())
+    emails = []
+    for _ in range(n):
+        emails.append(input())
+
+filtered_emails = filter_mail(emails)
+filtered_emails.sort()
+print(filtered_emails)
+
+Task # 18 Reduce Function
+from fractions import Fraction
+from functools import reduce
+import operator
+def product(fracs):
+    t =  reduce(operator.mul , fracs) 
+    return t.numerator, t.denominator
+if __name__ == '__main__':
+    fracs = []
+    for _ in range(int(input())):
+        fracs.append(Fraction(*map(int, input().split())))
+    result = product(fracs)
+    print(*result)
+
+Task # 19 Regex Substitution
+import re
+
+ii = int(input())
+
+for i in range(0,ii):
+   txt = input()
+   txt = re.sub(r"\ \&\&\ "," and ",txt)
+   txt = re.sub(r"\ \|\|\ "," or ",txt)
+   txt = re.sub(r"\ \&\&\ "," and ",txt)
+   txt = re.sub(r"\ \|\|\ "," or ",txt)
+   print(txt)
+
+Task # 20 Validating Credit Card Numbers
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import re
+TESTER = re.compile(
+    r"^"
+    r"(?!.*(\d)(-?\1){3})"
+    r"[456]"
+    r"\d{3}"
+    r"(?:-?\d{4}){3}"
+    r"$")
+for _ in range(int(input().strip())):
+    print("Valid" if TESTER.search(input().strip()) else "Invalid")
+
+Task # 21 Words Score
+def is_vowel(letter):
+    return letter in ['a', 'e', 'i', 'o', 'u', 'y']
+
+def score_words(words):
+    score = 0
+    for word in words:
+        num_vowels = 0
+        for letter in word:
+            if is_vowel(letter):
+                num_vowels += 1
+        if num_vowels % 2 == 0:
+            score += 2
+        else:
+            score += 1
+            
+    return score
+
+n = int(input())
+words = input().split()
+print(score_words(words))
+
+Task # 22 Default Arguments
+class EvenStream(object):
+    def __init__(self):
+        self.current = 0
+
+    def get_next(self):
+        to_return = self.current
+        self.current += 2
+        return to_return
+
+class OddStream(object):
+    def __init__(self):
+        self.current = 1
+
+    def get_next(self):
+        to_return = self.current
+        self.current += 2
+        return to_return
+def print_from_stream(n, stream=None):
+    if stream is None:
+        stream = EvenStream()
+    for _ in range(n):
+        print(stream.get_next())
+
+queries = int(input())
+for _ in range(queries):
+    stream_name, n = input().split()
+    n = int(n)
+    if stream_name == "even":
+        print_from_stream(n)
+    else:
+        print_from_stream(n, OddStream())
+
+Task # 23 Maximize It!
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+from itertools import product
+
+K,M = map(int,input().split())
+N = (list(map(int, input().split()))[1:] for _ in range(K))
+results = map(lambda x: sum(i**2 for i in x)%M, product(*N))
+print(max(results))
+
+Task # 24 Validating Postal Codes
+regex_integer_in_range = r"^[1-9][\d]{5}$"    # Do not delete 'r'.
+regex_alternating_repetitive_digit_pair = r"(\d)(?=\d\1)"    # Do not delete 'r'.
+
+
+import re
+P = input()
+
+print (bool(re.match(regex_integer_in_range, P)) 
+and len(re.findall(regex_alternating_repetitive_digit_pair, P)) < 2)
+
+Task # 25 Matrix Script
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+
+first_multiple_input = input().rstrip().split()
+
+n = int(first_multiple_input[0])
+
+m = int(first_multiple_input[1])
+
+matrix = []
+
+for _ in range(n):
+    matrix_item = input()
+    matrix.append(matrix_item)
+
+encoded_string = "".join([matrix[j][i] for i in range(m) for j in range(n)])
+pat = r'(?<=[a-zA-Z0-9])[^a-zA-Z0-9]+(?=[a-zA-Z0-9])'
+print(re.sub(pat,' ',encoded_string))
+
+
+
+
+
+
+
